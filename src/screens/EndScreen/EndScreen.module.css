@@ -1,0 +1,16 @@
+.endScreenContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titleEndScreen {
+    font-size: 5em;
+    margin: 2em 0 1.4em 0;
+}
+
+.buttonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}

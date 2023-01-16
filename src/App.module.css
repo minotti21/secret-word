@@ -1,0 +1,7 @@
+.appContainer {
+  margin: 0 auto;
+  width: 1280px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}

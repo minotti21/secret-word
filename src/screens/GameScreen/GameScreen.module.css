@@ -1,0 +1,97 @@
+.gameScreenContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.points {
+    margin-top: 1.8em;
+}
+
+.points span {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.title {
+    font-size: 3em;
+    margin-top: 0.4em;
+}
+
+.tip {
+    margin: 0.6em 0;
+}
+
+.tip span {
+    color: #ecfa00
+}
+
+.wordContainer {
+    margin: 1.5em;
+    padding: 1em;
+    border: 14px solid #bd001c;
+    display: flex;
+    justify-content: space-around;
+}
+
+.letter,
+.blankSquare {
+    font-size: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.5;
+    border: 3px solid #000;
+    height: 100px;
+    width: 100px;
+    text-transform: uppercase;
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+}
+
+.letterContainer p {
+    margin-bottom: 1.2em;
+    font-size: 28px;
+}
+
+.letterContainer form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.letterContainer input {
+    width: 60px;
+    height: 60px;
+    font-size: 2em;
+    text-align: center;
+    outline: none;
+    border: 3px solid #000;
+    margin-right: 1em;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.wrongLettersText {
+    margin-top: 1.4em;
+    font-size: 24px;
+}
+
+.wrongLettersContainer span {
+    margin-top: 0.2em;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0 0.4em;
+    text-transform: uppercase;
+}
+
+.warning {
+    margin-top: 1em;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #ff0026;
+    padding: 0.5em 1em;
+    border-radius: 2px;
+    color: #161616;
+}
