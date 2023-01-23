@@ -2,7 +2,7 @@ import { useState } from 'react'
 import StartScreen from './screens/StartScreen/StartScreen'
 import GameScreen from './screens/GameScreen/GameScreen'
 import EndScreen from './screens/EndScreen/EndScreen'
-import wordsList from './mocks/wordsList'
+import { wordsList } from './mocks/wordsList'
 import styles from './App.module.css'
 import { useEffect } from 'react'
 
@@ -12,35 +12,44 @@ const stages = [
   { id: 3, name: "end" }
 ];
 
+const amountOfChances = 5;
+
 function App() {
 
-  const [gameStage, setGameStage] = useState(stages[0].name);
-  const [word, setWord] = useState("");
+  const [score, setScore] = useState(0);
+  const [chances, setChances] = useState(amountOfChances);
   const [category, setCategory] = useState("");
   const [wordLetters, setWordLetters] = useState([]);
-  const [guessedLetters, setGuessedLetters] = useState([]);
+  const [wordLettersWithoutAccent, setWordLettersWithoutAccent] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
-  const [chances, setChances] = useState(5);
-  const [score, setScore] = useState(0);
   const [showWarning, setShowWarning] = useState(false);
   const [gameResult, setGameResult] = useState('playing');
+  const [guessedLetters, setGuessedLetters] = useState([]);
+  const [gameStage, setGameStage] = useState(stages[0].name);
 
   useEffect(() => {
     checkIfLostOrWon();
-  })
+    console.log(`render`)
+  }, [guessedLetters, chances]);
 
   let currentGameScreen;
 
-  const startGame = () => {
+  function removeAccents(string) {
+    return string.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
 
+  function generateWord() {
     const [word, category] = getRandomCategoryAndWord(wordsList);
-
     const letters = word.toLowerCase().split("");
+    const lettersWithoutAccent = removeAccents(word).toLowerCase().split("");
 
-    setWord(word);
     setCategory(category);
     setWordLetters(letters);
+    setWordLettersWithoutAccent(lettersWithoutAccent);
+  }
 
+  function startGame() {
+    generateWord();
     setGameStage(stages[1].name);
   }
 
@@ -48,8 +57,7 @@ function App() {
     return !/^[a-zA-Z]/.test(letter);
   }
 
-  const checkLetter = (letter) => {
-
+  function checkLetter(letter) {
     const normalizedLetter = letter.toLowerCase();
 
     if (checkIfNotLetter(normalizedLetter)) {
@@ -58,7 +66,7 @@ function App() {
     } else if (guessedLetters.includes(normalizedLetter) || wrongLetters.includes(normalizedLetter)) {
       setShowWarning("Você já tentou essa letra!")
       return
-    } else if (wordLetters.includes(normalizedLetter)) {
+    } else if (wordLettersWithoutAccent.includes(normalizedLetter)) {
       setGuessedLetters(prevLetters => [...prevLetters, normalizedLetter]);
     } else {
       setWrongLetters(prevLetters => [...prevLetters, normalizedLetter]);
@@ -66,51 +74,38 @@ function App() {
     }
 
     setShowWarning("")
-
   }
 
-  const retry = (goToMenu) => {
+  function retry(goToMenu, won) {
     setGuessedLetters([]);
     setWrongLetters([]);
-    setChances(5);
+    setChances(amountOfChances);
 
-    const [word, category] = getRandomCategoryAndWord(wordsList);
+    generateWord();
 
-    const letters = word.toLowerCase().split("");
+    !won && setScore(0);
 
-    setWord(word);
-    setCategory(category);
-    setWordLetters(letters);
-
-    setGameStage(stages[1].name);
-
-    if (gameResult === 'won') {
-      setScore(prevScore => prevScore + 100);
-    } else {
-      setScore(0);
-    }
-
-    setGameStage(goToMenu ? stages[0].name : stages[1].name)
-
+    setGameStage(goToMenu ? stages[0].name : stages[1].name);
   }
 
-  const formatWordLetters = wordLetters => [...new Set(wordLetters)]
+  function formatWordLetters(wordLetters) {
+    return [...new Set(wordLetters)];
+  }
 
   function checkIfLostOrWon() {
-
-    const formatedWordLetters = formatWordLetters(wordLetters);
+    const formatedWordLetters = formatWordLetters(wordLettersWithoutAccent);
 
     if (guessedLetters.length === formatedWordLetters.length && wordLetters.length !== 0) {
       setGameStage(stages[2].name);
       setGameResult('won');
+      setScore(score + 100);
     } else if (chances === 0) {
       setGameStage(stages[2].name);
       setGameResult('lost')
     }
   }
 
-  const getRandomCategoryAndWord = (wordsList) => {
-
+  function getRandomCategoryAndWord(wordsList) {
     const categories = Object.keys(wordsList);
     const category = categories[Math.floor(Math.random() * categories.length)];
     const word = wordsList[category][Math.floor(Math.random() * wordsList[category].length)];
@@ -123,17 +118,22 @@ function App() {
   } else if (gameStage === "game") {
     currentGameScreen = <GameScreen
       wordLetters={wordLetters}
+      wordLettersWithoutAccent={wordLettersWithoutAccent}
       category={category}
-      word={word}
       checkLetter={checkLetter}
       guessedLetters={guessedLetters}
       wrongLetters={wrongLetters}
       chances={chances}
       score={score}
-      showWarning={showWarning} />
-
+      showWarning={showWarning}
+    />
   } else {
-    currentGameScreen = <EndScreen won={gameResult === 'won'} retry={retry} />
+    currentGameScreen = <EndScreen
+      score={score}
+      word={wordLetters}
+      won={gameResult === 'won'}
+      retry={retry}
+      chances={chances} />
   }
 
   return (

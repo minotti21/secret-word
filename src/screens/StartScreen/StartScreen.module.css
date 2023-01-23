@@ -6,11 +6,11 @@
 }
 
 .flexTitle {
-    width: 60%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 5em 0 4em 0;
+    gap: 3em;
+    margin: 5em 0 3em 0;
 }
 
 .flipWord {
@@ -69,7 +69,7 @@
 
 .text {
     font-size: 2em;
-    font-weight: 500;
+    font-weight: 300;
     margin-bottom: 2em;
     color: #fff;
 }

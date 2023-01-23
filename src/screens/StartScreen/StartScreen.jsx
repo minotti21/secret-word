@@ -20,7 +20,7 @@ export default function StartScreen({ startGame }) {
                     </div>
                 </div>
             </div>
-            <p className={styles.text}>Clique no botão abaixo para começar a jogar!</p>
+            <p className={styles.text}>Clique no botão abaixo para iniciar o jogo!</p>
             <Button text={"Começar Jogo"} buttonSize={"big"} onClick={startGame} />
             
         </div>

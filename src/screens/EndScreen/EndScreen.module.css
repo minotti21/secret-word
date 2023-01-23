@@ -5,12 +5,27 @@
 }
 
 .titleEndScreen {
-    font-size: 5em;
-    margin: 2em 0 1.4em 0;
+    font-size: 4.5em;
+    margin: 1em 0 0.4em 0;
+}
+
+.score {
+    font-size: 2em;
+    margin: 1em 0 2em 0;
 }
 
 .buttonContainer {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
+}
+
+.paragraph {
+    font-size: 2em;
+    margin: 1em 0 1em 0;
+}
+
+.endScreenContainer span {
+    font-weight: 600;
+    color: #ffd900;
 }
