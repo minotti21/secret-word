@@ -1,5 +1,4 @@
 .button {
-    padding: 0.8em 1.6em;
     border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
@@ -36,8 +35,12 @@
 
 .medium {
     font-size: 1.2em;
+    height: 3em;
+    width: 6em;
 }
 
 .big {
     font-size: 2em;
+    height: 3em;
+    width: 10em;
 }

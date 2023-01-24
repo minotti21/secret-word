@@ -1,6 +1,7 @@
 import styles from './GameScreen.module.css'
 import Button from '../../components/Button/Button';
 import { useRef, useState } from 'react';
+import MadeBy from '../../components/MadeBy/MadeBy';
 
 export default function GameScreen({ checkLetter, wordLetters, wordLettersWithoutAccent, category, guessedLetters, wrongLetters, score, chances, showWarning }) {
 
@@ -61,6 +62,7 @@ export default function GameScreen({ checkLetter, wordLetters, wordLettersWithou
                     <p>{showWarning}</p>
                 </div>
             )}
+            <MadeBy />
         </div>
     );
 }

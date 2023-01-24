@@ -1,5 +1,6 @@
 import styles from './EndScreen.module.css'
 import Button from '../../components/Button/Button';
+import MadeBy from '../../components/MadeBy/MadeBy';
 
 export default function EndScreen({ retry, won, word, chances, score }) {
 
@@ -30,6 +31,7 @@ export default function EndScreen({ retry, won, word, chances, score }) {
                 <Button text={"Jogar novamente"} buttonSize={"big"} onClick={() => retry(false, won)} />
                 <Button text={"Voltar ao início"} color={"white"} buttonSize={"big"} onClick={() => retry(true, won)} />
             </div>
+            <MadeBy />
         </div >
     )
 }

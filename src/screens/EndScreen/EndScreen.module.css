@@ -5,8 +5,8 @@
 }
 
 .titleEndScreen {
-    font-size: 4.5em;
-    margin: 1em 0 0.4em 0;
+    font-size: 4em;
+    margin: 0.5em 0 0.2em 0;
 }
 
 .score {
@@ -25,7 +25,7 @@
     margin: 1em 0 1em 0;
 }
 
-.endScreenContainer span {
+.paragraph span, .score span {
     font-weight: 600;
     color: #ffd900;
 }

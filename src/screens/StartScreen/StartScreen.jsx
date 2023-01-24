@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Button from '../../components/Button/Button';
+import MadeBy from '../../components/MadeBy/MadeBy';
 import styles from './StartScreen.module.css'
 
 export default function StartScreen({ startGame }) {
@@ -22,7 +23,7 @@ export default function StartScreen({ startGame }) {
             </div>
             <p className={styles.text}>Clique no botão abaixo para iniciar o jogo!</p>
             <Button text={"Começar Jogo"} buttonSize={"big"} onClick={startGame} />
-            
+            <MadeBy />
         </div>
     );
 }

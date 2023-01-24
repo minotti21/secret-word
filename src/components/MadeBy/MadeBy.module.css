@@ -1,0 +1,20 @@
+.madeBy {
+    font-size: 1.2em;
+    color: #fff;
+    position: fixed;
+    bottom: 1em;
+}
+
+.madeBy a {
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.madeBy a:hover {
+    color: #ff2e4d;
+}
+
+.madeBy span {
+    color: #bd001c;
+}
